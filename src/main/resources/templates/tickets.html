@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Tickets</title>
+  <link href="/styles/main.css" rel="stylesheet" />
+</head>
+<body>
+<header>
+  <nav>
+    <a href="/">Home</a> |
+    <a href="/books">Books</a> |
+    <a href="/magazines">Magazines</a> |
+    <a href="/discmags">DiscMags</a> |
+    <a href="/tickets">Tickets</a> |
+    <a href="/cart">Cart</a> |
+    <a href="/cart-items">Cart Items</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Tickets</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Description</th>
+      <th>Text</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ticket : ${tickets}">
+      <td th:text="${ticket.description}">Description</td>
+      <td th:text="${ticket.text}">Text</td>
+      <td th:text="${ticket.price}">Price</td>
+      <td th:text="${ticket.quantity}">Quantity</td>
+      <td>
+        <a th:href="@{/tickets/edit-ticket(id=${ticket.id})}">Edit</a> |
+        <a th:href="@{/tickets/delete-ticket(id=${ticket.id})}"
+           onclick="return confirm('Delete this ticket?');">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <hr/>
+  <a th:href="@{/tickets/add-ticket}">Add New Ticket</a>
+</main>
+
+<footer>
+  <p>&copy; 2025 Simple E-Commerce</p>
+</footer>
+</body>
+</html>

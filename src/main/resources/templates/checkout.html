@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Checkout</title>
+    <link href="/styles/main.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/books">Books</a> |
+        <a href="/cart">Cart</a> |
+        <a href="/checkout">Checkout</a>
+    </nav>
+</header>
+
+<main>
+    <h1>Checkout</h1>
+    <div th:if="${cart != null}">
+        <table>
+            <thead>
+            <tr>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${cart.items}">
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.quantity}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <p>
+            <strong>Total Price:</strong>
+            <span th:text="${totalPrice}"></span>
+        </p>
+        <form th:action="@{/checkout/confirm}" method="post">
+            <button type="submit">Confirm Purchase</button>
+        </form>
+    </div>
+    <div th:if="${cart == null}">
+        <p>Your cart is empty or no cart found.</p>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Simple E-Commerce.</p>
+</footer>
+</body>
+</html>

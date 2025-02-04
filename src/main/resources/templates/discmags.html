@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>DiscMags</title>
+  <link href="/styles/main.css" rel="stylesheet" />
+</head>
+<body>
+<header>
+  <nav>
+    <a href="/">Home</a> |
+    <a href="/books">Books</a> |
+    <a href="/magazines">Magazines</a> |
+    <a href="/discmags">DiscMags</a> |
+    <a href="/tickets">Tickets</a> |
+    <a href="/cart">Cart</a> |
+    <a href="/cart-items">Cart Items</a>
+  </nav>
+</header>
+
+<main>
+  <h1>DiscMags</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Has Disc?</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Copies</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="discMag : ${discmags}">
+      <td th:text="${discMag.title}">Title</td>
+      <td th:text="${discMag.hasDisc}">HasDisc</td>
+      <td th:text="${discMag.price}">Price</td>
+      <td th:text="${discMag.quantity}">Quantity</td>
+      <td th:text="${discMag.copies}">Copies</td>
+      <td>
+        <a th:href="@{/discmags/edit-discmag(id=${discMag.id})}">Edit</a> |
+        <a th:href="@{/discmags/delete-discmag(id=${discMag.id})}"
+           onclick="return confirm('Delete this discmag?');">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <hr />
+  <a th:href="@{/discmags/add-discmag}">Add New DiscMag</a>
+</main>
+
+<footer>
+  <p>&copy; 2025 Simple E-Commerce</p>
+</footer>
+</body>
+</html>
